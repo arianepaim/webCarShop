@@ -1,10 +1,7 @@
 package com.desenvolvimento.webCarShop.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,6 +27,8 @@ public class User implements UserDetails {
     @Size(min = 3, message = "O nome deve conter no mínimo 3 caracteres.")
     private String name;
     @NotNull
+    @NotBlank
+    @Email
     @Column(unique = true)
     private String email;
     @NotNull
