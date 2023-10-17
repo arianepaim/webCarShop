@@ -1,11 +1,18 @@
 package com.desenvolvimento.webCarShop.view.model;
 
-import com.desenvolvimento.webCarShop.shared.UserDTO;
+import com.desenvolvimento.webCarShop.entities.User;
 import lombok.Data;
 
 @Data
 public class LoginResponse {
 
     private String token;
-    private UserDTO userDTO;
+    private User user;
+
+    public LoginResponse(){}
+
+    public LoginResponse(String token, User user) {
+        this.token = token;
+        this.user = user;
+    }
 }
