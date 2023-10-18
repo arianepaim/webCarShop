@@ -1,6 +1,7 @@
 package com.desenvolvimento.webCarShop.services;
 
 import com.desenvolvimento.webCarShop.entities.User;
+import com.desenvolvimento.webCarShop.entities.UserRoles;
 import com.desenvolvimento.webCarShop.entities.exception.ResourceNotFoundException;
 import com.desenvolvimento.webCarShop.repositories.UserRepository;
 import com.desenvolvimento.webCarShop.security.JWTService;
@@ -65,6 +66,7 @@ public class UserService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(UserRoles.USER);
         user = userRepository.save(user);
         userDto.setId(user.getId());
 
