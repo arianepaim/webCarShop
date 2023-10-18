@@ -37,6 +37,8 @@ public class User implements UserDetails {
             message = "A senha deve conter pelo menos 8 caracteres, incluindo pelo menos uma letra minúscula," +
                     "uma letra maiúscula, um número e um caractere especial (@#$%^&+=).")
     private String password;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", columnDefinition = "VARCHAR(255)")
     private UserRoles role;
 
     public User(String name, String email, String password, UserRoles role) {

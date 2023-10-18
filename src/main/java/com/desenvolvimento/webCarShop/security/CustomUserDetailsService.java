@@ -14,12 +14,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) {
-        return (UserDetails) userService.findByEmail(email);
+        return userService.findByEmail(email);
     }
 
 
     public UserDetails loadUserById(Long id) {
-        return (UserDetails) userService.findById(id);
+        return userService.findById(id);
     }
 
 
