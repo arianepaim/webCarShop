@@ -9,5 +9,6 @@ public class VehicleDTO {
     private String name;
     private String brand;
     private String model;
+    private Double price;
     private String image;
 }

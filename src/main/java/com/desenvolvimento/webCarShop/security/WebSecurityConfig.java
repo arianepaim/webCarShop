@@ -50,11 +50,11 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
+                                .requestMatchers(HttpMethod.POST, "/api/users", "/api/users/login")
+                                .permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/vehicles").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/vehicles/*").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/api/vehicles/*").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.POST, "/api/users", "/api/users/login")
-                                .permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )

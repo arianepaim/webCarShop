@@ -1,7 +1,5 @@
 package com.desenvolvimento.webCarShop.entities;
 
-import jakarta.persistence.Column;
-
 public enum UserRoles {
     ADMIN("admin"),
     USER("user");

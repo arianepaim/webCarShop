@@ -65,8 +65,12 @@ public class UserService {
             throw new InputMismatchException("Já existe usuário cadastrado com o email: " + user.getEmail());
         }
 
+        if (userDto.getRole() == null || userDto.getRole().equals(UserRoles.USER)) {
+            user.setRole(UserRoles.USER);
+        } else {
+            user.setRole(UserRoles.ADMIN);
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(UserRoles.USER);
         user = userRepository.save(user);
         userDto.setId(user.getId());
 

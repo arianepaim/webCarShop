@@ -17,15 +17,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         return userService.findByEmail(email);
     }
 
-
     public UserDetails loadUserById(Long id) {
         return userService.findById(id);
     }
 
 
-//    private User getUser(Supplier<Optional<User>> supplier) {
-//        return supplier.get().orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
-//    }
 }
 
 

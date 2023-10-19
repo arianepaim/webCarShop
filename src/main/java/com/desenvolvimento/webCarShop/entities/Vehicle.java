@@ -1,7 +1,6 @@
 package com.desenvolvimento.webCarShop.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -29,5 +28,6 @@ public class Vehicle {
     @NotNull
     @NotBlank
     private String model;
+    private Double price;
     private String image;
 }

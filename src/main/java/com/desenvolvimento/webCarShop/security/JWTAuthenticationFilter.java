@@ -14,7 +14,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Optional;
 
 @Component
@@ -37,7 +36,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
             UserDetails user = customUserDetailsService.loadUserById(id.get());
 
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
