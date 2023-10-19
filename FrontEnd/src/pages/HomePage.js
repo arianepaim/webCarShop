@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import VehicleCard from '../components/VehicleCard';
-import NavigationBar from '../components/NavBar';
+import NavBar from '../components/NavBar/NavBar';
+import "./HomePage.css";
 
 const HomePage = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -16,11 +17,11 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
-        <NavigationBar />
-      {vehicles.map(vehicle => (
-        <VehicleCard key={vehicle.id} vehicle={vehicle} />
-      ))}
+    <div className="container">
+        <NavBar />        
+          {vehicles.map(vehicle => (
+          <VehicleCard key={vehicle.id} vehicle={vehicle} />
+          ))}        
     </div>
   );
 };

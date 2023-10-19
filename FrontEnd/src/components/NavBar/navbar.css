@@ -1,0 +1,6 @@
+.containerNavBar {
+  display: flex;
+  background-color: var(--primary-color);
+  height: 10%;
+  width: 100%;
+}
