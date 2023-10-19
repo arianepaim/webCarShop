@@ -18,7 +18,7 @@ public class VehicleService {
     private VehicleRepository vehicleRepository;
 
     public List<VehicleDTO> findAll() {
-        List<Vehicle> list = vehicleRepository.findAll();
+        List<Vehicle> list = vehicleRepository.findAllByOrderByPriceAsc();
         return list.stream().map(vehicle -> new ModelMapper().map(vehicle, VehicleDTO.class)).collect(Collectors.toList());
     }
 
