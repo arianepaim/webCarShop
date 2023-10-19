@@ -1,0 +1,42 @@
+.container-NavBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--background-color);
+  height: 6rem;
+  width: 100%;
+  margin: 0;    
+  overflow: hidden;
+  padding: 0 10%;
+  font-size: 1.4rem;
+
+}
+.logo {
+  width: 80%;
+  height: auto;
+}
+.container-logo{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.container-menu{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.horizontal-list {
+  list-style: none; 
+  padding: 0; 
+}
+
+.horizontal-list li {
+  display: inline; 
+  margin-right: 3rem; 
+}
+ul {
+  text-decoration: none;
+  list-style-type: none;
+}

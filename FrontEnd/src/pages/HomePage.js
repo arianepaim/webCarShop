@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
-import VehicleCard from '../components/VehicleCard';
-import NavBar from '../components/NavBar/NavBar';
-import "./HomePage.css";
+import VehicleCard from '../components/VehicleCard/index';
+import NavBar from '../components/NavBar/index';
+import Search from '../components/Search';
+
 
 const HomePage = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -17,8 +18,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="container">
-        <NavBar />        
+    <div className="containerHomePage">
+        <NavBar /> 
+        <Search />       
           {vehicles.map(vehicle => (
           <VehicleCard key={vehicle.id} vehicle={vehicle} />
           ))}        
