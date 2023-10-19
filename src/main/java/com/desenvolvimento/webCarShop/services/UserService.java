@@ -68,7 +68,7 @@ public class UserService {
         if (userDto.getRole() == null || userDto.getRole().equals(UserRoles.USER)) {
             user.setRole(UserRoles.USER);
         } else {
-            user.setRole(UserRoles.ADMIN);
+            user.setRole(user.getRole());
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);

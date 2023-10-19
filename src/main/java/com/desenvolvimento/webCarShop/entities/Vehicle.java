@@ -28,6 +28,8 @@ public class Vehicle {
     @NotNull
     @NotBlank
     private String model;
+    @NotNull
     private Double price;
+    @Column(columnDefinition = "TEXT")
     private String image;
 }
