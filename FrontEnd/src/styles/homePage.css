@@ -4,5 +4,6 @@
 .container-cards {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     padding: 3% 12%;
 }

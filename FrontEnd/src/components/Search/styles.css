@@ -6,15 +6,16 @@
     padding: 0.3% 10%;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 .input-search {
     width: 95%;
     height: 100%;
-    position: relative;
     padding: 0 1%;
     border-radius: 10px;
     font-size: 1.3rem;
     border: none;
+    padding-right: 2rem;
 }
 input:focus {
     outline: none;
