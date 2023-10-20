@@ -1,11 +1,13 @@
-import React from 'react';
-
+import React from "react";
+import "./styles.css";
 const VehicleCard = ({ vehicle }) => {
   return (
-    <div>
-      <h2>{vehicle.name}</h2>
-      <p>Valor: {vehicle.value}</p>
-      {/* Renderize outras informações do veículo aqui */}
+    <div className="card">
+      <img src={vehicle.image} alt="Imagem do carro" />
+      <div className="container">
+        <p>{vehicle.brand} {vehicle.name} {vehicle.model}</p>
+        <p>R$ {vehicle.price}</p>
+      </div>
     </div>
   );
 };
