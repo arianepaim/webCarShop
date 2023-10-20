@@ -15,6 +15,12 @@ const Search = ({ vehicles, setFilteredVehicles }) => {
     setFilteredVehicles(filteredVehicles);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="container-search">
       <input 
@@ -23,6 +29,7 @@ const Search = ({ vehicles, setFilteredVehicles }) => {
         placeholder="Pesquisa" 
         value={search} 
         onChange={event => setSearch(event.target.value)}
+        onKeyDown={handleKeyDown}
       />
       <FontAwesomeIcon 
         icon={faSearch} 
