@@ -10,5 +10,7 @@ public class VehicleDTO {
     private String brand;
     private String model;
     private Double price;
+    private Integer ano;
+    private String cor;
     private String image;
 }

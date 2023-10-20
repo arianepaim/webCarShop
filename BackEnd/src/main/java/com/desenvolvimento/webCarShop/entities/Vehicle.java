@@ -30,6 +30,11 @@ public class Vehicle {
     private String model;
     @NotNull
     private Double price;
+    @NotNull
+    private Integer ano;
+    @NotNull
+    @NotBlank
+    private String cor;
     @Column(columnDefinition = "TEXT")
     private String image;
 }
