@@ -7,12 +7,14 @@ import "../styles/homePage.css";
 
 const HomePage = () => {
   const [vehicles, setVehicles] = useState([]);
+  const [filteredVehicles, setFilteredVehicles] = useState([]);
 
   useEffect(() => {
     const fetchVehicles = async () => {
       const response = await api.get("/vehicles");
-      const orderedVehicles = response.data.sort((a, b) => a.value - b.value);
-      setVehicles(orderedVehicles);
+      const vehiclesResponse = response.data;
+      setVehicles(vehiclesResponse);
+      setFilteredVehicles(vehiclesResponse);
     };
     fetchVehicles();
   }, []);
@@ -20,9 +22,9 @@ const HomePage = () => {
   return (
     <div className="container-home">
       <NavBar />
-      <Search />
+      <Search vehicles={vehicles} setFilteredVehicles={setFilteredVehicles} />
       <div className="container-cards">
-        {vehicles.map((vehicle) => (
+        {filteredVehicles.map((vehicle) => (
           <VehicleCard key={vehicle.id} vehicle={vehicle} />
         ))}
       </div>
