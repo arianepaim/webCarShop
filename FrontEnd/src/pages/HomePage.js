@@ -4,6 +4,7 @@ import VehicleCard from "../components/VehicleCard/index";
 import NavBar from "../components/NavBar/index";
 import Search from "../components/Search";
 import "../styles/homePage.css";
+import FilterButton from "../components/FilterButton";
 
 const HomePage = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -22,11 +23,14 @@ const HomePage = () => {
   return (
     <div className="container-home">
       <NavBar />
-      <Search vehicles={vehicles} setFilteredVehicles={setFilteredVehicles} />
+        <Search vehicles={vehicles} setFilteredVehicles={setFilteredVehicles} />
+      <div className="container-filtro">
+      <FilterButton />
       <div className="container-cards">
         {filteredVehicles.map((vehicle) => (
           <VehicleCard key={vehicle.id} vehicle={vehicle} />
         ))}
+      </div>
       </div>
     </div>
   );

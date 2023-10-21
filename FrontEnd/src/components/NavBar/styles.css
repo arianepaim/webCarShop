@@ -5,11 +5,10 @@
   background-color: var(--background-color);
   height: 6rem;
   width: 100%;
-  margin: 0;
-  overflow: hidden;
+  margin: 0; 
   padding: 0 10%;
   font-size: 1.4rem;
-
+  color: var(--primary-color);
 }
 
 .logo {
@@ -49,3 +48,27 @@ ul {
   text-decoration: none;
   list-style-type: none;
 }
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+.dropdown-menu {
+  padding: 5px;
+  position: absolute;
+  display: flex;
+  top: 33px;
+  left: 0;
+  flex-direction: column;
+}
+.li-logout{  
+  position: relative;
+  
+}
+.dropdown-content{
+  margin: 5px 0;
+}
+.dropdown-content:hover{
+  cursor: pointer;
+  font-weight: bold;
+}
+

@@ -60,6 +60,7 @@ public class WebSecurityConfig {
                                 .anyRequest()
                                 .authenticated()
                 )
+                .cors().and()
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
