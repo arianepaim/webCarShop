@@ -1,3 +1,4 @@
+import CarDetailsPage from "../pages/Details";
 import HomePage from "../pages/HomePage"
 import Login from "../pages/Login"
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
@@ -8,6 +9,7 @@ const Rotas = () => {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/details' element={<CarDetailsPage />} />
           <Route path='*' element={<Navigate to='/' />} />
         </Routes>
     </Router>

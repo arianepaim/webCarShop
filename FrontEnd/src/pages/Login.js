@@ -14,10 +14,10 @@ function Login() {
 
     try {
       const response = await api.post("/users/login", { email, password });    
-      const data = await response.data;
-      console.log('data', data.user.name)
+      const data = await response.data;  
       localStorage.setItem('token', data.token); 
       localStorage.setItem('user', data.user.name); 
+      localStorage.setItem('role', data.user.role); 
       navigate('/');
     } catch (error) {
       console.error('Ocorreu um erro:', error);

@@ -1,0 +1,29 @@
+.btn-filter {
+  display: flex;
+  position: absolute;
+  top: 50px;
+  cursor: pointer;
+}
+.menu-filter {
+  margin-top: 50px;
+  width: 320px;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+.li-filter {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #c4c0c0;
+    justify-content: space-between;
+}
+ul {
+    padding-left: 0;
+}
+.ipt-filter{
+  margin-top: 20px;
+  width: 100%;
+}

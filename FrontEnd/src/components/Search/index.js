@@ -4,16 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Search = ({ vehicles, setFilteredVehicles }) => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(""); 
 
   const handleSearch = () => {
     const filteredVehicles = vehicles.filter(vehicle =>
-      vehicle.brand.toLowerCase().includes(search.toLowerCase()) ||
+      (vehicle.brand.toLowerCase().includes(search.toLowerCase()) ||
       vehicle.name.toLowerCase().includes(search.toLowerCase()) ||
-      vehicle.model.toLowerCase().includes(search.toLowerCase())
-    );
+      vehicle.model.toLowerCase().includes(search.toLowerCase()))    
+      );   
     setFilteredVehicles(filteredVehicles);
-  };
+  };  
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {

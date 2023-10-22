@@ -3,15 +3,21 @@ import "./styles.css";
 import logo from "../../assets/logo-web.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faUser } from "@fortawesome/free-solid-svg-icons";
+import Modal from "../Modal";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showItem, setShowItem] = useState(false);
   const user = localStorage.getItem("user");
   const menuRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+    if (role === "ADMIN") {
+      setShowItem(true);
+    }
     if (token) {
       setIsLoggedIn(true);
     }
@@ -34,24 +40,33 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
+    localStorage.clear(); // Remove todos os itens do localStorage
+    window.location.reload(); // Recarrega a página
   };
 
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
-
   };
 
   return (
     <div className="container-NavBar">
       <div className="container-logo">
-        <img className="logo" src={logo} alt="Imagem da logo da empresa" />
+        <a className="logo" href="/"><img  src={logo} alt="Imagem da logo da empresa" /></a>
       </div>
 
       <div className="container-menu">
         <ul className="horizontal-list">
-          <li>Comprar Carro</li>
-          <li>Vender Carro</li>
-          <li>Sobre Nós</li>
+          {!showItem ? <li>Comprar Carro</li> : null}
+          {!showItem ? <li>Vender Carro</li> : null}
+          {showItem ? (
+            <li>
+              <Modal 
+              buttonName="Adicionar Carro"
+              modaTitle="Adicionar Carro"
+               />
+            </li>
+          ) : null}
+          {!showItem ? <li>Sobre Nós</li> : null}
           {isLoggedIn ? (
             <li className="li-logout" onClick={handleMenuClick} ref={menuRef}>
               <FontAwesomeIcon icon={faUser} /> {user}
@@ -60,9 +75,7 @@ const Navbar = () => {
                   <li className="dropdown-content" onClick={handleLogout}>
                     Logout
                   </li>
-                  <li className="dropdown-content" >
-                    Mudar Senha
-                  </li>
+                  <li className="dropdown-content">Mudar Senha</li>
                 </ul>
               )}
             </li>
