@@ -6,11 +6,11 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 const FilterButton = ({ onFiltersChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState("");
-  const [selectedAge, setSelectedAge] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [brands, setBrands] = useState([]);
-  const [age, setAges] = useState([]);
+  const [year, setYears] = useState([]);
   const [price, setPrice] = useState([]);
   const [color, setColor] = useState([]);
 
@@ -23,11 +23,11 @@ const FilterButton = ({ onFiltersChange }) => {
     }
   };
 
-  const handleApplyFilters = (marca) => {
+  const handleApplyFilters = (brand) => {
     // Lógica para obter os filtros selecionados
     const selectedFilters = {
       // Exemplo de filtro: tipo de veículo
-      vehicleType: marca,
+      vehicleType: brand,
       // Outros filtros...
     };
 
@@ -38,8 +38,8 @@ const FilterButton = ({ onFiltersChange }) => {
   const handleBrandSelect = () => {
     setSelectedBrand(!selectedBrand);
   };
-  const handleAgeSelect = () => {
-    setSelectedAge(!selectedAge);
+  const handleYearSelect = () => {
+    setSelectedYear(!selectedYear);
   };
   const handlePriceSelect = () => {
     setSelectedPrice(!selectedPrice);
@@ -57,17 +57,17 @@ const FilterButton = ({ onFiltersChange }) => {
       ];
       setBrands(uniqueBrands);
 
-      const uniqueAges = [
-        ...new Set(vehiclesResponse.map((vehicle) => vehicle.ano)),
+      const uniqueYears = [
+        ...new Set(vehiclesResponse.map((vehicle) => vehicle.year)),
       ];
-      setAges(uniqueAges);
+      setYears(uniqueYears);
 
       const uniquePrice = [
         ...new Set(vehiclesResponse.map((vehicle) => vehicle.price)),
       ];
       setPrice(uniquePrice);
       const uniqueColor = [
-        ...new Set(vehiclesResponse.map((vehicle) => vehicle.cor)),
+        ...new Set(vehiclesResponse.map((vehicle) => vehicle.color)),
       ];
       setColor(uniqueColor);
     } catch (error) {
@@ -110,8 +110,8 @@ const FilterButton = ({ onFiltersChange }) => {
               </li>
             </ul>
           )}
-          <li className="li-filter" onClick={handleAgeSelect}>
-            {selectedAge ? (
+          <li className="li-filter" onClick={handleYearSelect}>
+            {selectedYear ? (
               <React.Fragment>
                 Ano <FaArrowUp />
               </React.Fragment>
@@ -121,7 +121,7 @@ const FilterButton = ({ onFiltersChange }) => {
               </React.Fragment>
             )}
           </li>
-          {selectedAge && (
+          {selectedYear && (
             <ul>
               <li>
                 <select
@@ -129,9 +129,9 @@ const FilterButton = ({ onFiltersChange }) => {
                   onChange={(event) => handleApplyFilters(event.target.value)}
                 >
                   <option value="">Selecione uma marca</option>
-                  {age.map((age) => (
-                    <option key={age} value={age}>
-                      {age}
+                  {year.map((year) => (
+                    <option key={year} value={year}>
+                      {year}
                     </option>
                   ))}
                 </select>
@@ -185,9 +185,9 @@ const FilterButton = ({ onFiltersChange }) => {
                   onChange={(event) => handleApplyFilters(event.target.value)}
                 >
                   <option value="">Selecione uma cor</option>
-                  {color.map((cor) => (
-                    <option key={cor} value={cor}>
-                      {cor}
+                  {color.map((color) => (
+                    <option key={color} value={color}>
+                      {color}
                     </option>
                   ))}
                 </select>

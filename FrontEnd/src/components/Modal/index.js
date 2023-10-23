@@ -10,8 +10,8 @@ const Modal = ({ buttonName, modaTitle, vehicleData }) => {
     model: vehicleData?.model || '',
     price: vehicleData?.price || 0,
     image: vehicleData?.image || '',
-    ano: vehicleData?.ano || 0,
-    cor: vehicleData?.cor || '',
+    year: vehicleData?.year || 0,
+    color: vehicleData?.color || '',
   });
   
   
@@ -31,7 +31,7 @@ console.log('data', vehicleData)
       const parsedCarData = {
         ...carData,
         price: parseInt(carData.price),
-        ano: parseInt(carData.ano),
+        year: parseInt(carData.year),
       };
   
       if (vehicleData?.id) {
@@ -104,14 +104,14 @@ console.log('data', vehicleData)
           type="number"
           name="ano"
           placeholder="Ano"
-          value={carData.ano}
+          value={carData.year}
           onChange={handleInputChange}
         />
         <input
           type="text"
           name="cor"
           placeholder="Cor"
-          value={carData.cor}
+          value={carData.color}
           onChange={handleInputChange}
         />
         <input
