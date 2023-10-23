@@ -2,6 +2,7 @@ package com.desenvolvimento.webCarShop.services;
 
 import com.desenvolvimento.webCarShop.entities.User;
 import com.desenvolvimento.webCarShop.entities.UserRoles;
+import com.desenvolvimento.webCarShop.entities.exception.InvalidPasswordException;
 import com.desenvolvimento.webCarShop.entities.exception.ResourceNotFoundException;
 import com.desenvolvimento.webCarShop.repositories.UserRepository;
 import com.desenvolvimento.webCarShop.security.JWTService;
@@ -65,16 +66,44 @@ public class UserService {
             throw new InputMismatchException("Já existe usuário cadastrado com o email: " + user.getEmail());
         }
 
-        if (userDto.getRole() == null || userDto.getRole().equals(UserRoles.USER)) {
-            user.setRole(UserRoles.USER);
+        if (validatePassword(user.getPassword())) {
+            if (userDto.getRole() == null || userDto.getRole().equals(UserRoles.USER)) {
+                user.setRole(UserRoles.USER);
+            } else {
+                user.setRole(user.getRole());
+            }
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user = userRepository.save(user);
+            userDto.setId(user.getId());
         } else {
-            user.setRole(user.getRole());
+            throw new InvalidPasswordException("A senha não atende aos critérios de segurança.");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user = userRepository.save(user);
-        userDto.setId(user.getId());
 
         return userDto;
+    }
+
+    public void updatePassword(Long userId, String oldPassword, String newPassword) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário com o ID " + userId + " não encontrado."));
+
+        if (isPasswordValid(user, oldPassword)) {
+            if (validatePassword(newPassword)) {
+                user.setPassword(passwordEncoder.encode(newPassword));
+                userRepository.save(user);
+            } else {
+                throw new InvalidPasswordException("A nova senha não atende aos critérios de segurança.");
+            }
+        } else {
+            throw new InvalidPasswordException("Senha antiga incorreta.");
+        }
+    }
+
+    private boolean isPasswordValid(User user, String password) {
+        return passwordEncoder.matches(password, user.getPassword());
+    }
+
+    public boolean validatePassword(String newPassword) {
+        return newPassword.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
     }
 
     public LoginResponse logInto(String email, String password) {

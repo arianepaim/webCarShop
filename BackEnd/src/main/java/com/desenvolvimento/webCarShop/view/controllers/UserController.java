@@ -1,11 +1,11 @@
 package com.desenvolvimento.webCarShop.view.controllers;
 
+import com.desenvolvimento.webCarShop.entities.exception.InvalidPasswordException;
+import com.desenvolvimento.webCarShop.entities.exception.ResourceNotFoundException;
 import com.desenvolvimento.webCarShop.services.UserService;
 import com.desenvolvimento.webCarShop.shared.UserDTO;
-import com.desenvolvimento.webCarShop.view.model.LoginRequest;
-import com.desenvolvimento.webCarShop.view.model.LoginResponse;
-import com.desenvolvimento.webCarShop.view.model.UserRequest;
-import com.desenvolvimento.webCarShop.view.model.UserResponse;
+import com.desenvolvimento.webCarShop.view.model.*;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,11 +41,23 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> insert(@RequestBody UserRequest request) {
+    public ResponseEntity<UserResponse> insert(@Valid @RequestBody UserRequest request) {
         UserDTO userDTO = new ModelMapper().map(request, UserDTO.class);
         userDTO = service.insert(userDTO);
         UserResponse response = new ModelMapper().map(userDTO, UserResponse.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping("/{id}/update-password")
+    public ResponseEntity<String> updatePassword(@PathVariable Long id, @Valid @RequestBody UpdatePasswordRequest request) {
+        try {
+            service.updatePassword(id, request.getOldPassword(), request.getNewPassword());
+            return ResponseEntity.ok("Senha atualizada com sucesso");
+        } catch (InvalidPasswordException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/login")

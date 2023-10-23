@@ -31,10 +31,10 @@ public class Vehicle {
     @NotNull
     private Double price;
     @NotNull
-    private Integer ano;
+    private Integer year;
     @NotNull
     @NotBlank
-    private String cor;
+    private String color;
     @Column(columnDefinition = "TEXT")
     private String image;
 }

@@ -9,7 +9,7 @@ public class VehicleRequest {
     private String brand;
     private String model;
     private Double price;
-    private Integer ano;
-    private String cor;
+    private Integer year;
+    private String color;
     private String image;
 }

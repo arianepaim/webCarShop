@@ -50,7 +50,7 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers(HttpMethod.POST, "/api/users", "/api/users/login")
+                                .requestMatchers(HttpMethod.POST, "/api/users", "/api/users/login", "/api/users/{id}/update-password")
                                 .permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/vehicles", "/api/vehicles/*")
                                 .permitAll()
@@ -60,7 +60,8 @@ public class WebSecurityConfig {
                                 .anyRequest()
                                 .authenticated()
                 )
-                .cors().and()
+                .cors(cors -> {
+                })
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

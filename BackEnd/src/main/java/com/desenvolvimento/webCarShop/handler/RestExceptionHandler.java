@@ -1,6 +1,7 @@
 package com.desenvolvimento.webCarShop.handler;
 
 import com.desenvolvimento.webCarShop.entities.error.ErrorMessage;
+import com.desenvolvimento.webCarShop.entities.exception.InvalidPasswordException;
 import com.desenvolvimento.webCarShop.entities.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,5 +16,12 @@ public class RestExceptionHandler {
 
         ErrorMessage errorMessage = new ErrorMessage("Not found", HttpStatus.NOT_FOUND.value(), e.getMessage());
         return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<?> handleInvalidPasswordException(InvalidPasswordException e) {
+
+        ErrorMessage errorMessage = new ErrorMessage("Invalid Password", HttpStatus.BAD_REQUEST.value(), e.getMessage());
+        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
 }
