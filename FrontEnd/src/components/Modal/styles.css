@@ -1,0 +1,73 @@
+.container-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Defina um valor de z-index alto para que o modal fique na parte superior */
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 50%;
+}
+/* Modal title */
+.modal-content h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Modal input fields */
+.modal-content input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Modal buttons */
+.modal-content button {
+  background-color: #0074cc; /* Cor de fundo dos botões */
+  color: #fff; /* Cor do texto dos botões */
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-content button:last-child {
+  margin-right: 0;
+}
+.modal-ipt-number {
+  display: flex;
+  flex-direction: row;
+}
+.modal-ipt-price {
+  margin-right: 20px;
+}
+.modal-container-btn {
+    display: flex;
+    flex-direction: row;
+justify-content: flex-end;
+}
+.modal-btn-add {
+    width: 25%;
+}
+.modal-btn-cancel {
+    width: 25%;
+    background-color: rgb(154, 50, 50) !important;
+}
+.modal-btn-cancel:hover {
+    background-color: rgb(217, 9, 9) !important;
+}

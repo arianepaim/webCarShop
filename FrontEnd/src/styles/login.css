@@ -3,9 +3,10 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    width: 100%;
 }
 .box-login {
-  max-width: 30%;
+  width: 25%;
   margin: 0 auto;
   padding: 20px;
   background-color: #fff;
@@ -31,8 +32,8 @@ label {
   color: #555;
 }
 
-input[type="text"],
-input[type="password"] {
+.form-control[type="text"],
+.form-control[type="password"] {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;

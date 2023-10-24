@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ReactModal from 'react-modal';
 import api from '../../services/api';
+import './styles.css';
 
 const Modal = ({ buttonName, modaTitle, vehicleData }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -13,9 +13,7 @@ const Modal = ({ buttonName, modaTitle, vehicleData }) => {
     year: vehicleData?.year || 0,
     color: vehicleData?.color || '',
   });
-  
-  
-console.log('data', vehicleData)
+
   const token = localStorage.getItem('token');
 
   const handleInputChange = (event) => {
@@ -26,14 +24,19 @@ console.log('data', vehicleData)
     }));
   };
 
+  const showAlertAndRedirect = (message, redirectTo) => {
+    alert(message); // Exibe o alerta com a mensagem de sucesso
+    window.location.href = redirectTo; // Redireciona para a página inicial (ou outra página desejada)
+  };
+
   const handleAddCar = async () => {
     try {
       const parsedCarData = {
         ...carData,
-        price: parseInt(carData.price),
+        price: parseFloat(carData.price.replace('R$ ', '').replace(',', '.')),
         year: parseInt(carData.year),
       };
-  
+
       if (vehicleData?.id) {
         // Realizar uma requisição PUT para atualizar os dados
         const response = await api.put(`/vehicles/${vehicleData.id}`, parsedCarData, {
@@ -42,8 +45,8 @@ console.log('data', vehicleData)
             Authorization: ` ${token}`,
           },
         });
-  
-        console.log('Car updated successfully:', response.data);
+
+        showAlertAndRedirect('Carro atualizado com sucesso.', '/'); // Exibe alerta e redireciona para a página inicial
       } else {
         // Realizar uma requisição POST para adicionar um novo veículo
         const response = await api.post('/vehicles', parsedCarData, {
@@ -52,78 +55,80 @@ console.log('data', vehicleData)
             Authorization: ` ${token}`,
           },
         });
-  
-        console.log('Car added successfully:', response.data);
+
+        showAlertAndRedirect('Carro adicionado com sucesso.', '/'); // Exibe alerta e redireciona para a página inicial
       }
-  
-      setModalIsOpen(false);
     } catch (error) {
-      console.error('Error adding/updating car:', error);
+      console.error('Erro ao adicionar/atualizar o carro:', error);
     }
   };
-  
 
   return (
     <div>
       <div onClick={() => setModalIsOpen(true)}>{buttonName}</div>
-      <ReactModal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-      >
-        {/* Conteúdo do modal */}
-        <h2>{modaTitle}</h2>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nome"
-          value={carData.name}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="brand"
-          placeholder="Marca"
-          value={carData.brand}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="model"
-          placeholder="Modelo"
-          value={carData.model}
-          onChange={handleInputChange}
-        />
-        <input
-          type="number"
-          name="price"
-          placeholder="Preço"
-          value={carData.price}
-          onChange={handleInputChange}
-        />
-        <input
-          type="number"
-          name="ano"
-          placeholder="Ano"
-          value={carData.year}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="cor"
-          placeholder="Cor"
-          value={carData.color}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="image"
-          placeholder="URL da imagem"
-          value={carData.image}
-          onChange={handleInputChange}
-        />
-        <button onClick={handleAddCar}>Adicionar</button>
-        <button onClick={() => setModalIsOpen(false)}>Cancelar</button>
-      </ReactModal>
+      {modalIsOpen && (
+        <div className="container-modal">
+          <div className="modal-content">
+            <h2>{modaTitle}</h2>
+            <input
+              type="text"
+              name="name"
+              placeholder="Nome"
+              value={carData.name}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              name="brand"
+              placeholder="Marca"
+              value={carData.brand}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              name="model"
+              placeholder="Modelo"
+              value={carData.model}
+              onChange={handleInputChange}
+            />
+            <div className='modal-ipt-number'>
+            <input
+            className='modal-ipt-price'
+              type="number"
+              name="price"
+              placeholder="Preço"
+              value={carData.price}
+              onChange={handleInputChange}
+            />
+            <input
+              type="number"
+              name="year"
+              placeholder="Ano"
+              value={carData.year}
+              onChange={handleInputChange}
+            />
+            </div>
+            <input
+              type="text"
+              name="color"
+              placeholder="Cor"
+              value={carData.color}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              name="image"
+              placeholder="URL da imagem"
+              value={carData.image}
+              onChange={handleInputChange}
+            />
+            <div className='modal-container-btn'>
+            <button className='modal-btn-add' onClick={handleAddCar}>Adicionar</button>
+            <button className='modal-btn-cancel' onClick={() => setModalIsOpen(false)}>Cancelar</button>
+            </div>
+          </div>
+        </div>
+      )}      
     </div>
   );
 };

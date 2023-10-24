@@ -5,6 +5,8 @@ import Navbar from "./../components/NavBar/index";
 import "../styles/carDetailsPage.css";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const CarDetailsPage = () => {
   const location = useLocation();
@@ -58,6 +60,7 @@ const CarDetailsPage = () => {
       console.error("Error deleting vehicle:", error);
     }
   };
+
   const handleEdit = () => {
     setEditModalIsOpen(true);
     setEditVehicleData(vehicle);
@@ -67,26 +70,40 @@ const CarDetailsPage = () => {
     <div>
       <Navbar />
       <div className="car-details-container">
-        <div className="car-details-card">
-          <div className="car-details-carousel">
-            <img
-              src={imageUrls[currentImageIndex]}
-              alt={`Car Image ${currentImageIndex}`}
-              className="car-details-image"
-            />
-            <button
-              className="carousel-button prev-button"
-              onClick={handlePrevImage}
-            >
-              Prev
-            </button>
-            <button
-              className="carousel-button next-button"
-              onClick={handleNextImage}
-            >
-              Next
-            </button>
+      <div className="car-details-carousel">
+          <img
+            src={imageUrls[currentImageIndex]}
+            alt={`Car Image ${currentImageIndex}`}
+            className="car-details-image"
+          />
+          <button
+            className="carousel-button-prev-button"
+            onClick={handlePrevImage}
+          >
+            <FontAwesomeIcon icon={faChevronLeft} /> {/* Ícone de seta esquerda */}
+          </button>
+          <button
+            className="carousel-button-next-button"
+            onClick={handleNextImage}
+          >
+            <FontAwesomeIcon icon={faChevronRight} /> {/* Ícone de seta direita */}
+          </button>
+          <div className="mini-image-thumbnails">
+            {imageUrls.map((imageUrl, index) => (
+              <div
+                key={index}
+                className={`mini-image-thumbnail ${
+                  index === currentImageIndex ? "active" : ""
+                }`}
+                onClick={() => setCurrentImageIndex(index)}
+              >
+                <img src={imageUrl} alt={`Car Image ${index}`} />
+              </div>
+            ))}
           </div>
+        </div>
+
+        <div className="car-details-card">
           <div className="car-details-content">
             <h2 className="car-details-title">
               {vehicle.brand} {vehicle.name} {vehicle.model}
@@ -95,7 +112,8 @@ const CarDetailsPage = () => {
             <p className="car-details-description">{vehicle.description}</p>
             {/* Exiba outros detalhes do veículo */}
           </div>
-          <Modal            
+                <div className="details-container-btn">
+          <Modal
             buttonName="Editar"
             modaTitle="Editar Carro"
             isOpen={editModalIsOpen}
@@ -105,6 +123,7 @@ const CarDetailsPage = () => {
           <button className="delete-button" onClick={handleDelete}>
             Excluir
           </button>
+          </div>
         </div>
       </div>
     </div>
