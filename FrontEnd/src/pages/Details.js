@@ -8,6 +8,15 @@ import Modal from "../components/Modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
+const formatPrice = (price) => {
+  return price.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+};
+
 const CarDetailsPage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -48,29 +57,35 @@ const CarDetailsPage = () => {
   };
 
   const handleDelete = async () => {
-    try {
-      await api.delete(`/vehicles/${vehicleId}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
-      });
-      navigate("/");
-    } catch (error) {
-      console.error("Error deleting vehicle:", error);
+    const confirmDelete = window.confirm("Tem certeza que deseja excluir o veículo?");
+    if (confirmDelete) {
+      try {
+        await api.delete(`/vehicles/${vehicleId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
+        });
+        navigate("/");
+      } catch (error) {
+        console.error("Error deleting vehicle:", error);
+      }
     }
   };
+  
 
   const handleEdit = () => {
     setEditModalIsOpen(true);
-    setEditVehicleData(vehicle);
+
+    // Copie as imagens do veículo para o estado do modal de edição
+    setEditVehicleData({ ...vehicle, images: vehicle.image.split(";") });
   };
 
   return (
     <div>
       <Navbar />
       <div className="car-details-container">
-      <div className="car-details-carousel">
+        <div className="car-details-carousel">
           <img
             src={imageUrls[currentImageIndex]}
             alt={`Car Image ${currentImageIndex}`}
@@ -80,21 +95,20 @@ const CarDetailsPage = () => {
             className="carousel-button-prev-button"
             onClick={handlePrevImage}
           >
-            <FontAwesomeIcon icon={faChevronLeft} /> {/* Ícone de seta esquerda */}
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <button
             className="carousel-button-next-button"
             onClick={handleNextImage}
           >
-            <FontAwesomeIcon icon={faChevronRight} /> {/* Ícone de seta direita */}
+            <FontAwesomeIcon icon={faChevronRight} />
           </button>
           <div className="mini-image-thumbnails">
             {imageUrls.map((imageUrl, index) => (
               <div
                 key={index}
-                className={`mini-image-thumbnail ${
-                  index === currentImageIndex ? "active" : ""
-                }`}
+                className={`mini-image-thumbnail ${index === currentImageIndex ? "active" : ""
+                  }`}
                 onClick={() => setCurrentImageIndex(index)}
               >
                 <img src={imageUrl} alt={`Car Image ${index}`} />
@@ -108,21 +122,27 @@ const CarDetailsPage = () => {
             <h2 className="car-details-title">
               {vehicle.brand} {vehicle.name} {vehicle.model}
             </h2>
-            <p className="car-details-price">R$ {vehicle.price}</p>
-            <p className="car-details-description">{vehicle.description}</p>
-            {/* Exiba outros detalhes do veículo */}
+            <div className="car-details-info">
+              <p className="price">{formatPrice(vehicle.price)}</p>
+              <hr />
+              <p>Ano: {vehicle.year}</p>
+              <hr />
+              <p>Cor: {vehicle.color}</p>
+            </div>
           </div>
-                <div className="details-container-btn">
-          <Modal
-            buttonName="Editar"
-            modaTitle="Editar Carro"
-            isOpen={editModalIsOpen}
-            onRequestClose={() => setEditModalIsOpen(false)}
-            vehicleData={editVehicleData}
-          />
-          <button className="delete-button" onClick={handleDelete}>
-            Excluir
-          </button>
+          <div className="details-container-btn">
+            <button className="details-btn-edit" onClick={handleEdit}>
+            <Modal
+              buttonName="Editar"
+              modaTitle="Editar Carro"
+              isOpen={editModalIsOpen}
+              onRequestClose={() => setEditModalIsOpen(false)}
+              vehicleData={editVehicleData}
+            />
+            </button>
+            <button className="details-btn-delete" onClick={handleDelete}>
+              Excluir
+            </button>
           </div>
         </div>
       </div>

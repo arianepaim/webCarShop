@@ -4,16 +4,19 @@
   height: 100vh;
   width: 100%;
 }
+
 .car-details-carousel {
   position: relative;
   width: 70%;
 }
+
 .carousel-button-prev-button {
   width: 50px;
   top: -40%;
   position: relative;
   opacity: 0.5;
 }
+
 .carousel-button-next-button {
   width: 50px;
   top: -40%;
@@ -21,17 +24,21 @@
   position: relative;
   opacity: 0.5;
 }
+
 .car-details-card {
-  height: 70%;
+  height: 40%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 30%;
+  align-items: flex-start;
+  width: 25%;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 10px;
+  margin-left: 30px;
   background-color: #fff;
+  margin-top: 3rem;
 }
+
 
 .car-details-image {
   width: 100%;
@@ -44,7 +51,7 @@
 .car-details-title {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 }
 
 .car-details-price {
@@ -53,14 +60,15 @@
   margin-bottom: 10px;
 }
 
-.car-details-description {
-  font-size: 16px;
-  margin-bottom: 20px;
+
+.details-container-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 80px;
 }
-.details-container-btn{
-  
-}
-/* Miniatura das imagens */
+
 .mini-image-thumbnails {
   display: flex;
   justify-content: center;
@@ -77,11 +85,57 @@
 }
 
 .mini-image-thumbnail.active {
-  border-color: #007bff; /* Adicione a cor desejada quando ativa */
+  border-color: #232628;
 }
 
 .mini-image-thumbnail img {
-  width: 100px; /* Ajuste o tamanho das miniaturas conforme necessário */
-  height: 80px; /* Ajuste o tamanho das miniaturas conforme necessário */
+  width: 100px;
+  height: 80px;
   object-fit: cover;
+}
+
+.car-details-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.car-details-info p {
+  margin-bottom: 30px;
+}
+.car-details-info hr {
+  width: 100%;
+  margin: 10px 0;
+  border: none;
+  border-top: 1px solid rgb(188, 182, 182);
+}
+
+.price {
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.details-btn-delete {
+  width: 100%;
+  background-color: rgb(154, 50, 50) !important;
+}
+.details-btn-delete:hover {
+
+}
+.details-btn-edit {
+  width: 100%;
+  background-color:var(--primary-color) !important;
+  margin-bottom: 20px;
+}
+.details-btn-edit:hover {
+
+}
+
+.edit-button {
+  width: 100%;
+  background-color: rgb(154, 50, 50) !important;
+}
+.edit-button:hover {
+  background-color: rgb(217, 9, 9) !important;
 }
