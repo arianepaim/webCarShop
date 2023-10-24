@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Sistema de Veículos à Venda
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O Sistema de Veículos à Venda é uma aplicação web que permite o controle de uma loja de carros. Os administradores podem adicionar, editar e excluir carros. A autenticação é gerenciada por tokens JWT. Este README fornece instruções detalhadas sobre como configurar, executar e utilizar o projeto.
 
-## Available Scripts
+## Tecnologias Utilizadas
 
-In the project directory, you can run:
+- Backend: Java
+- Frontend: React
+- Banco de Dados: PostgreSQL
+- Autenticação: JWT (JSON Web Tokens)
 
-### `npm start`
+## Configuração do Banco de Dados
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Certifique-se de ter o PostgreSQL instalado.
+2. Inicie o PgAdmin e crie um banco de dados chamado "webCarShop".
+3. No projeto backend, acesse a pasta "resources" e edite o arquivo "application.properties". Altere a senha do banco de dados para corresponder à senha do PostgreSQL que você está usando.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Inicialização do Projeto
 
-### `npm test`
+### Backend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+No projeto backend, siga estas etapas:
 
-### `npm run build`
+1. Execute o código do projeto Java.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Frontend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+No projeto frontend, siga estas etapas:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Abra o terminal na pasta do frontend.
+2. Execute o comando `npm install` para instalar todas as dependências.
+3. Após a conclusão da instalação, execute `npm start` para iniciar o servidor frontend.
 
-### `npm run eject`
+## Funcionalidades do Site
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Visualização de Carros e Detalhes: Os carros e seus detalhes podem ser visualizados sem a necessidade de login.
+- Venda de Carros: Para vender um carro, é necessário fazer um registro e fazer login. A funcionalidade de enviar mensagem para um administrador ainda não foi implementada, mas o formulário para enviar a mensagem está disponível.
+- Alteração de Senha e Logout: Após fazer login, os usuários podem alterar sua senha na página onde está o nome e fazer logout.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Cadastro de Administrador
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Para cadastrar um administrador, você pode fazê-lo diretamente no banco de dados ou utilizando uma ferramenta como Postman ou Insomnia:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Endpoint: `http://localhost:8080/api/users`
+- Método: POST
 
-## Learn More
+JSON para o cadastro de administrador:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```json
+{
+    "name": "Thais",
+    "email": "thais@gmail.com",
+    "password": "12345Th@",
+    "role": "ADMIN"
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Observe que, ao cadastrar um administrador, o cadastro pelo site será apenas para usuários.
 
-### Code Splitting
+## Usuários Pré-Cadastrados
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Para fins de testes, já existem alguns usuários pré-cadastrados no banco de dados:
 
-### Analyzing the Bundle Size
+- Usuário: ravi@gmail.com, Senha: 12345R@v
+- Administrador: ariane@gmail.com, Senha: 12345@Ri
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Funcionalidades do Administrador
 
-### Making a Progressive Web App
+Ao fazer login como administrador, é possível:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Adicionar carros.
+- Editar informações de carros.
+- Excluir carros ao clicar nos cards.

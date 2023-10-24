@@ -120,16 +120,11 @@
   width: 100%;
   background-color: rgb(154, 50, 50) !important;
 }
-.details-btn-delete:hover {
 
-}
 .details-btn-edit {
   width: 100%;
   background-color:var(--primary-color) !important;
   margin-bottom: 20px;
-}
-.details-btn-edit:hover {
-
 }
 
 .edit-button {

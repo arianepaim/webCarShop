@@ -11,7 +11,6 @@ function ChangePassword() {
   const navigate = useNavigate();
 
   const { id } = useParams();
-  console.log(id); 
 
   const handleOldPasswordChange = (event) => {
     setOldPassword(event.target.value);

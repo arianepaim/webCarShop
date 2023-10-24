@@ -5,13 +5,17 @@ import Navbar from "./../components/NavBar/index";
 import "../styles/carDetailsPage.css";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Footer from "./../components/Footer/index";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 const formatPrice = (price) => {
-  return price.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
+  return price.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });
@@ -27,8 +31,14 @@ const CarDetailsPage = () => {
   const navigate = useNavigate();
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [editVehicleData, setEditVehicleData] = useState(null);
+  const [showItem, setShowItem] = useState(false);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+    if (role === "ADMIN") {
+      setShowItem(true);
+    }
     const fetchVehicle = async () => {
       const response = await api.get(`/vehicles/${vehicleId}`);
       const vehicleData = response.data;
@@ -57,7 +67,9 @@ const CarDetailsPage = () => {
   };
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm("Tem certeza que deseja excluir o veículo?");
+    const confirmDelete = window.confirm(
+      "Tem certeza que deseja excluir o veículo?"
+    );
     if (confirmDelete) {
       try {
         await api.delete(`/vehicles/${vehicleId}`, {
@@ -72,7 +84,6 @@ const CarDetailsPage = () => {
       }
     }
   };
-  
 
   const handleEdit = () => {
     setEditModalIsOpen(true);
@@ -88,7 +99,7 @@ const CarDetailsPage = () => {
         <div className="car-details-carousel">
           <img
             src={imageUrls[currentImageIndex]}
-            alt={`Car Image ${currentImageIndex}`}
+            alt={`Foto carro ${currentImageIndex}`}
             className="car-details-image"
           />
           <button
@@ -107,11 +118,12 @@ const CarDetailsPage = () => {
             {imageUrls.map((imageUrl, index) => (
               <div
                 key={index}
-                className={`mini-image-thumbnail ${index === currentImageIndex ? "active" : ""
-                  }`}
+                className={`mini-image-thumbnail ${
+                  index === currentImageIndex ? "active" : ""
+                }`}
                 onClick={() => setCurrentImageIndex(index)}
               >
-                <img src={imageUrl} alt={`Car Image ${index}`} />
+                <img src={imageUrl} alt={`Foto carro ${index}`} />
               </div>
             ))}
           </div>
@@ -131,21 +143,31 @@ const CarDetailsPage = () => {
             </div>
           </div>
           <div className="details-container-btn">
-            <button className="details-btn-edit" onClick={handleEdit}>
-            <Modal
-              buttonName="Editar"
-              modaTitle="Editar Carro"
-              isOpen={editModalIsOpen}
-              onRequestClose={() => setEditModalIsOpen(false)}
-              vehicleData={editVehicleData}
-            />
-            </button>
-            <button className="details-btn-delete" onClick={handleDelete}>
-              Excluir
-            </button>
+            {showItem ? (
+              <button className="details-btn-edit" onClick={handleEdit}>
+                <Modal
+                  buttonName="Editar"
+                  modaTitle="Editar Carro"
+                  isOpen={editModalIsOpen}
+                  onRequestClose={() => setEditModalIsOpen(false)}
+                  vehicleData={editVehicleData}
+                />
+              </button>
+            ) : null}
+            {showItem ? (
+              <button className="details-btn-delete" onClick={handleDelete}>
+                Excluir
+              </button>
+            ) : null}
+            {!showItem ? (
+              <a href="/">
+                <button className="details-btn-edit">Tenho interesse</button>
+              </a>
+            ) : null}
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

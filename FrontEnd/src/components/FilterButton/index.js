@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import api from "../../services/api";
 import "./styles.css";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 const FilterButton = ({ onFiltersChange }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,14 +26,9 @@ const FilterButton = ({ onFiltersChange }) => {
   };
 
   const handleApplyFilters = (brand) => {
-    // Lógica para obter os filtros selecionados
     const selectedFilters = {
-      // Exemplo de filtro: tipo de veículo
       vehicleType: brand,
-      // Outros filtros...
     };
-
-    // Chama a função de callback com os filtros selecionados
     onFiltersChange(selectedFilters);
   };
 
@@ -78,6 +75,7 @@ const FilterButton = ({ onFiltersChange }) => {
   return (
     <div className="dropdown-filter">
       <div className="btn-filter" onClick={handleToggle}>
+        <FontAwesomeIcon className="filter-icon-filter" icon={faFilter} />
         {isOpen ? "Ocultar Filtro" : "Selecionar Filtro"}
       </div>
       {isOpen && (

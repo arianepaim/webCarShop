@@ -1,14 +1,11 @@
 import { createStore } from "redux";
 
-// Defina o estado inicial
 const initialState = {
   role: null,
 };
 
-// Defina as ações
 const SET_ROLE = "SET_ROLE";
 
-// Defina o reducer
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_ROLE:
@@ -21,7 +18,6 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-// Crie a store
 const store = createStore(reducer);
 
 export default store;

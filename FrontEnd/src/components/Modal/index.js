@@ -16,7 +16,6 @@ const Modal = ({ buttonName, modaTitle, vehicleData }) => {
     color: vehicleData?.color || '',
   });
 
-  // Copie as imagens do veículo para o estado de imagens do Modal
   const [carImages, setCarImages] = useState(vehicleData?.image ? vehicleData.image.split(';') : []);
 
   const token = localStorage.getItem('token');  
@@ -69,20 +68,15 @@ const Modal = ({ buttonName, modaTitle, vehicleData }) => {
     }
   };
 
-  // Função para remover uma imagem da lista de imagens
   const handleRemoveImage = (index) => {
-    // Crie uma cópia da lista de imagens
     const updatedImages = [...carImages];
-    // Remova a imagem na posição 'index'
     updatedImages.splice(index, 1);
-    // Atualize o estado com a lista de imagens atualizada
     setCarImages(updatedImages);
   };
 
   return (
     <div>
       <div className='modal-btn-editar' onClick={() => {
-        // Copie as imagens do veículo para o estado de imagens do Modal
         setCarImages(vehicleData?.image ? vehicleData.image.split(';') : []);
         setModalIsOpen(true);
       }}>{buttonName}</div>

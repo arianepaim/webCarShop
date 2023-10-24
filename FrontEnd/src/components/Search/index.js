@@ -1,38 +1,39 @@
 import React, { useState } from "react";
 import "./styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Search = ({ vehicles, setFilteredVehicles }) => {
-  const [search, setSearch] = useState(""); 
+  const [search, setSearch] = useState("");
 
   const handleSearch = () => {
-    const filteredVehicles = vehicles.filter(vehicle =>
-      (vehicle.brand.toLowerCase().includes(search.toLowerCase()) ||
-      vehicle.name.toLowerCase().includes(search.toLowerCase()) ||
-      vehicle.model.toLowerCase().includes(search.toLowerCase()))    
-      );   
+    const filteredVehicles = vehicles.filter(
+      (vehicle) =>
+        vehicle.brand.toLowerCase().includes(search.toLowerCase()) ||
+        vehicle.name.toLowerCase().includes(search.toLowerCase()) ||
+        vehicle.model.toLowerCase().includes(search.toLowerCase())
+    );
     setFilteredVehicles(filteredVehicles);
-  };  
+  };
 
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleSearch();
     }
   };
 
   return (
     <div className="container-search">
-      <input 
-        className="input-search" 
-        type="text" 
-        placeholder="Pesquisa" 
-        value={search} 
-        onChange={event => setSearch(event.target.value)}
+      <input
+        className="input-search"
+        type="text"
+        placeholder="Pesquisa"
+        value={search}
+        onChange={(event) => setSearch(event.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <FontAwesomeIcon 
-        icon={faSearch} 
+      <FontAwesomeIcon
+        icon={faSearch}
         className="icon-search"
         onClick={handleSearch}
       />

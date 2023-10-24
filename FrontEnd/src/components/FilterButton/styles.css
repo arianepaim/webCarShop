@@ -3,6 +3,11 @@
   position: absolute;
   top: 50px;
   cursor: pointer;
+  font-weight: bold;
+  align-items: center;   
+}
+.filter-icon-filter{
+  padding-right: 10px;
 }
 .menu-filter {
   margin-top: 50px;

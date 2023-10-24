@@ -5,6 +5,7 @@ import NavBar from "../components/NavBar/index";
 import Search from "../components/Search";
 import "../styles/homePage.css";
 import FilterButton from "../components/FilterButton";
+import Footer from "../components/Footer";
 
 const HomePage = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -45,9 +46,11 @@ const HomePage = () => {
         {filteredVehicles.map((vehicle) => (
           <VehicleCard key={vehicle.id} vehicle={vehicle} />
         ))}
-        </div>
+        </div>      
       </div>
+    <Footer />
     </div>
+    
   );
 };
 

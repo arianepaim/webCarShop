@@ -19,6 +19,7 @@
     padding-right: 2rem;
     outline: none;
     position: relative;
+    margin-bottom: 0 !important;
 }
 
 input:focus {

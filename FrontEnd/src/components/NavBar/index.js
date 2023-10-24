@@ -13,15 +13,14 @@ const Navbar = () => {
   const [venderCarro, setVenderCarro] = useState(false);
   const user = localStorage.getItem("user");
   const userId = localStorage.getItem("id");
-  console.log(userId)
 
   const menuRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
-    if(role === "USER"){
-      setVenderCarro(true)
+    if (role === "USER") {
+      setVenderCarro(true);
     }
     if (role === "ADMIN") {
       setShowItem(true);
@@ -48,8 +47,8 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    localStorage.clear(); // Remove todos os itens do localStorage
-    window.location.reload(); // Recarrega a página
+    localStorage.clear();
+    window.location.reload();
   };
 
   const handleMenuClick = () => {
@@ -59,20 +58,31 @@ const Navbar = () => {
   return (
     <div className="container-NavBar">
       <div className="container-logo">
-        <a className="logo" href="/"><img src={logo} alt="Imagem da logo da empresa" /></a>
+        <a className="logo" href="/">
+          <img src={logo} alt="Imagem da logo da empresa" />
+        </a>
       </div>
 
       <div className="container-menu">
         <ul className="horizontal-list">
-          {!showItem ? <li><a href='/'>Comprar Carro</a></li> : null}
-          {!showItem && venderCarro ? <li><a href='/car-sale'>Vender Carro</a></li> : null}
-          {!isLoggedIn ?<li><a href='/login'>Vender Carro</a></li> : null}
+          {!showItem ? (
+            <li>
+              <a href="/">Comprar Carro</a>
+            </li>
+          ) : null}
+          {!showItem && venderCarro ? (
+            <li>
+              <a href="/car-sale">Vender Carro</a>
+            </li>
+          ) : null}
+          {!isLoggedIn ? (
+            <li>
+              <a href="/login">Vender Carro</a>
+            </li>
+          ) : null}
           {showItem ? (
             <li>
-              <Modal
-                buttonName="Adicionar Carro"
-                modaTitle="Adicionar Carro"
-              />
+              <Modal buttonName="Adicionar Carro" modaTitle="Adicionar Carro" />
             </li>
           ) : null}
           {!showItem ? <li>Sobre Nós</li> : null}
@@ -84,7 +94,9 @@ const Navbar = () => {
                   <li className="dropdown-content" onClick={handleLogout}>
                     Logout
                   </li>
-                  <li className="dropdown-content"><a href={`/change-password/${userId}`}>Mudar Senha</a></li>
+                  <li className="dropdown-content">
+                    <a href={`/change-password/${userId}`}>Mudar Senha</a>
+                  </li>
                 </ul>
               )}
             </li>

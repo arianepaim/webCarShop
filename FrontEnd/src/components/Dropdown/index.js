@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const DropdownExample = () => {
-  const [options, setOptions] = useState(['Option 1', 'Option 2', 'Option 3']);
+  const [options, setOptions] = useState(["Option 1", "Option 2", "Option 3"]);
 
   return (
     <div>
@@ -17,7 +17,6 @@ const DropdownExample = () => {
       </div>
     </div>
   );
-}
+};
 
 export default DropdownExample;
-
